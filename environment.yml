@@ -1,0 +1,29 @@
+name: pix2pix3d
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+#  - tqdm=4.55.1
+#  - feather-format
+  - cudatoolkit=11.2
+  - cudnn=8.1
+#  - nvidia/label/cuda-11.3.0::libcublas
+#  - gdcm
+  - graphviz
+  - pip:
+    # - tensorflow==2.5
+    # - keras==2.3.1
+    - tensorflow==2.8
+    - keras
+    - pydicom
+    - git+https://www.github.com/keras-team/keras-contrib.git
+    - pyarrow
+    - matplotlib
+    - pandas
+    - scikit-image
+    - pypng
+    - numpy
+    - pydot
+    - pynetdicom==1.5
+#    - xnat==1.5
+#    - nvidia_tensorrt
