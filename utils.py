@@ -23,6 +23,7 @@ from skimage import metrics
 from source.data_loader import WND, rWND
 
 import matplotlib.pyplot as plt
+from scipy.stats import ttest_ind
 
 ###############################################################
 # * Functions
@@ -562,7 +563,7 @@ def plot_2_metrics(input_dirs):
             'ssim': ssim,
             'nmse': nmse
         }
-    
+
     # Create boxplots
     fig, axes = plt.subplots(1, 3, figsize=(12, 5))
 
@@ -572,6 +573,12 @@ def plot_2_metrics(input_dirs):
     axes[0].set_xlim(0.85, 1.65)
     #axes[0].set_xticks([1, 1.4])
     axes[0].set_xticklabels([r'$Data_{woA}$', r'$Data_{wA}$'])
+
+    # perform t-test
+    t_stat, p_value = ttest_ind(results[0]['psnr'], results[1]['psnr'])
+    print(f'PSNR - t-statistic: {t_stat}, p-value: {p_value}')
+
+    axes[0].text(1.5, 0.9, f'p-value: {p_value:.4f}', fontsize=8, ha='center')
 
     # SSIM boxplot
     ssim_box = axes[1].boxplot([results[dir]['ssim'] for dir in input_dirs], positions=[1, 1.5])
